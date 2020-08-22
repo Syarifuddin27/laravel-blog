@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SettingsTableSeeder extends Seeder
+class SettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +17,5 @@ class SettingsTableSeeder extends Seeder
             "contact_email" => "info@laravel_blog.com",
             "address" => "Madura Indonesia"
         ]);
-        
     }
 }

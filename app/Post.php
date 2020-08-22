@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Post extends Model
 {
-
     protected $table = 'posts';
 
     protected $fillable = [
         'title', 
         'slug', 
         'content', 
-        'category_id', 
+        'harga_jual',
+        'harga_grosir',
+        'jumlah',
+        'category_id',
         'featured', 
-        'slug', 
         'user_id'
     ];
 

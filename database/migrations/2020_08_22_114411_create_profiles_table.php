@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProfilesTable extends Migration
 {
@@ -16,9 +16,12 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('avatar')->nullable();
-            $table->integer('user_id');
+            
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->text('about')->nullable();
-            $table->string('facebook')->nullable();
+            $table->string('ig')->nullable();
             $table->string('youtube')->nullable();
             $table->timestamps();
         });

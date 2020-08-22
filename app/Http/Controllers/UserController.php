@@ -11,11 +11,6 @@ use App\Http\Controllers\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $users = User::all();
@@ -122,28 +117,4 @@ class UserController extends Controller
         flashy()->success('Tag Deleted');
         return redirect()->back();
     }
-
-    // public function makeUser()
-    // {
-    //     // $user = User::find($id);
-
-    //     // $user->admin = 1;
-    //     // $user->save();
-
-    //     // flashy()->success('Successfully changed user permission.');
-    //     // return redirect()->back();
-    //     echo "user";
-
-    // }
-    
-    // public function not_amin($id)
-    // {
-    //     $user = User::find($id);
-
-    //     $user->admin = 0;
-    //     $user->save();
-
-    //     flashy()->success('Successfully changed user permission.');
-    //     return redirect()->back();
-    // }
 }

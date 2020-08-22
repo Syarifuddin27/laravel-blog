@@ -50,7 +50,7 @@
 
         <!-- Subscribe Form -->
 
-        @include('includes.form')
+        @include('includes.form')  
 
         <!-- End Subscribe Form -->
     </div>
@@ -112,14 +112,11 @@
     <script src="{{ asset('app/js/ScrollMagic.min.js') }}"></script>
     <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
 
-    {{-- <script src="//code.jquery.com/jquery.js"></script> --}}
-    @include('flashy::message')
-
-
     <!-- ...end JS Script -->
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b3afd0e292594c4"></script>
     <script id="dsq-count-scr" src="//https-syarifuddin27-blogspot-com.disqus.com/count.js" async></script>
+    
 </body>
 
 </html>

@@ -14,7 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admin.tags.index')->with('tags', Tag::all());
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        //
     }
 
     /**
@@ -35,17 +35,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tag' => 'required'
-        ]);
-
-        Tag::create([
-            'tag' => $request->tag
-        ]);
-
-        flashy()->success('Tag Created succesfully');
-
-        return redirect('admin/tags');
+        //
     }
 
     /**
@@ -67,7 +57,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('admin.tags.edit', compact('tag'));
+        //
     }
 
     /**
@@ -79,12 +69,7 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        Request()->validate([
-            'tag' => 'required'
-        ]);
-        $tag->update($request->all());
-        flashy()->success('Tags has been Update');
-        return redirect('admin/tags');
+        //
     }
 
     /**
@@ -93,10 +78,8 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        Tag::destroy($id);
-        flashy()->success('Tag Deleted');
-        return redirect()->back();
+        //
     }
 }

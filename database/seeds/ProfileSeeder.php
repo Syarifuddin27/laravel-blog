@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class ProfileSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'user_id' => $user->id,
             'avatar' => 'uploads/avatars/1.jpg',
             'about' => 'Apapun Oke Asal Jalan.',
-            'facebook' => 'facebook.com/syarifuddin27',
+            'ig' => 'facebook.com/syarifuddin27',
             'youtube' => 'youtube.com'
         ]);
     }

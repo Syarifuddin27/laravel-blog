@@ -8,7 +8,6 @@ use App\Setting;
 use App\Category;
 use App\Tag;
 
-
 class FrontEndController extends Controller
 {
     public function index()

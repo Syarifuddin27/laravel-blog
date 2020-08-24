@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Quotes</label>
-                <textarea name="quotes" cols="5" rows="5" class="form-control">{{ $settings->quotes }</textarea>
+                <textarea name="quotes" cols="5" rows="5" class="form-control">{{ $settings->quotes }}</textarea>
             </div>
             <div class="form-group">
                 <div class="text-center">

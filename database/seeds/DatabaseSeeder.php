@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfileSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(PostSeeder::class);
     }
 }

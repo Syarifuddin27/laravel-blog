@@ -14,7 +14,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $settings = Setting::first();
+        return view('admin.settings.settings', compact('settings', $settings));
     }
 
     /**
@@ -69,7 +70,21 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        $this->validate(request(), [
+            'site_name' => 'required',
+            'contact_number' => 'required',
+            'contact_email' => 'required|email',
+            'address' => 'required'
+        ]);
+        $setting = Setting::first();
+        $setting->site_name = request()->site_name;
+        $setting->address = request()->address;
+        $setting->contact_number = request()->contact_number;
+        $setting->contact_email = request()->contact_email;
+        $setting->quotes = request()->quotes;
+        $setting->save();
+
+        return redirect()->back();
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -14,7 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.profile')->with('user', Auth::user());
     }
 
     /**
@@ -69,7 +71,34 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email'
+            
+        ]);
+        $user = Auth::user();
+        if($request->hasFile('avatar'))
+        {
+            $avatar = $request->avatar;
+            $avatar_new_name = time(). $avatar->getClientOriginalName();
+            $avatar->move('uploads/avatars', $avatar_new_name);
+            $user->profile->avatar = 'uploads/avatars/' . $avatar_new_name;
+            $user->profile->save();
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->profile->facebook = $request->facebook;
+        $user->profile->youtube = $request->youtube;
+        $user->profile->about = $request->about;
+        $user->save();
+        $user->profile->save();
+
+        if ($request->has('password'))
+        {
+            $user->password = Hash::make($request->password);
+        }
+        flashy()->info('Account profile updated.');
+        return redirect()->back();
     }
 
     /**

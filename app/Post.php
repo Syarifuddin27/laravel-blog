@@ -16,7 +16,8 @@ class Post extends Model
         'harga_grosir',
         'jumlah',
         'category_id',
-        'featured', 
+        'featured',
+        'qty',
         'user_id'
     ];
 
@@ -37,5 +38,14 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    public function trDetail()
+    {
+        return $this->hasMany('App\TransactionDetail');
+    }
+
+    public function postView()
+    {
+        return $this->hasMany('App\PostView');
     }
 }

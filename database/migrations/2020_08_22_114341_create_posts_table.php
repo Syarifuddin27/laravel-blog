@@ -24,12 +24,11 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->integer('harga_jual');
             $table->integer('harga_grosir');
-            $table->integer('jumlah');
-
+            $table->integer('qty');
+            $table->string('featured');
+            
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
-            $table->string('featured');
             $table->timestamps();
         });
     }

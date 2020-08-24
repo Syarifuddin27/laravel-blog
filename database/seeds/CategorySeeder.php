@@ -15,7 +15,9 @@ class CategorySeeder extends Seeder
 
             ['name' => 'Perawatan Tubuh'],
             ['name' => 'Peralatan Dapur'],
-            ['name' => 'Electronik']
+            ['name' => 'Electronik'],
+            ['name' => 'Alat Bangunan'],
+            ['name' => 'Mekanik']
     
         ]);
     }

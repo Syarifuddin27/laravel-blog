@@ -4,20 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
+
     protected $table = 'posts';
 
     protected $fillable = [
         'title', 
         'slug', 
         'content', 
-        'harga_jual',
-        'harga_grosir',
-        'jumlah',
-        'category_id',
-        'featured',
-        'qty',
+        'category_id', 
+        'featured', 
+        'slug', 
         'user_id'
     ];
 
@@ -38,14 +37,5 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-    public function trDetail()
-    {
-        return $this->hasMany('App\TransactionDetail');
-    }
-
-    public function postView()
-    {
-        return $this->hasMany('App\PostView');
     }
 }

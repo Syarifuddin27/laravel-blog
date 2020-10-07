@@ -43,6 +43,7 @@ class TagController extends Controller
             'tag' => $request->tag
         ]);
 
+        flashy()->success('Tag Created succesfully');
 
         return redirect('admin/tags');
     }
@@ -82,7 +83,7 @@ class TagController extends Controller
             'tag' => 'required'
         ]);
         $tag->update($request->all());
-    
+        flashy()->success('Tags has been Update');
         return redirect('admin/tags');
     }
 
@@ -92,10 +93,10 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
         Tag::destroy($id);
-        
+        flashy()->success('Tag Deleted');
         return redirect()->back();
     }
 }

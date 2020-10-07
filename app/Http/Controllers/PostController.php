@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use MercurySeries\Flashy\Flashy;
+
 use Auth;
 use App\Tag;
 use App\Post;
 use File;
 use App\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -36,6 +38,8 @@ class PostController extends Controller
 
         if ($categories->count() == 0 || $tags->count() == 0) 
         {
+
+            Flashy::error('You must have some categories and tags before attemping to create a post.');
             
             return redirect()->back();
             
@@ -53,6 +57,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'title' => 'required',
             'featured' => 'required|image',
@@ -70,15 +75,12 @@ class PostController extends Controller
             'content' => $request->content,
             'featured' => 'uploads/posts/' . $featured_new_name,
             'category_id' => $request->category_id,
-            'slug' => Str::random(10),
-            'user_id' => Auth::id(),
-            'harga_jual'=> $request->harga_jual,
-            'harga_grosir'=> $request->harga_grosir,
-            'qty'=> $request->jumlahBarang
+            'slug' => str_slug($request->title),
+            'user_id' => Auth::id()
         ]);
-        
             $post->tags()->attach($request->tags);
 
+        flashy()->success('Succesfully to Create new Post.');
 
         return redirect('admin/post');
     }
@@ -114,10 +116,72 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        $post = Post::find($id);
+
+        if ($request->hasFile('featured'))
+        {
+            $featured = $request->featured;
+            $featured_new_name = time() . $featured->getClientOriginalName();
+            // File::delete('' .  $post->featured);
+            $featured->move('uploads/posts', $featured_new_name);
+            
+            $post->featured = 'uploads/posts/' . $featured_new_name;
+        }
+
+        
+
+        
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+        $post->slug = str_slug($request->title);
+        $post->tags()->sync($request->tags);
+        $post->save();
+        
+        flashy()->success('Succesfully to Update.');
+
+        return redirect('admin/post');
     }
+    // public function update(Request $request, Post $post)
+    // {
+    //     Request()->validate([
+    //         'title' => 'required',
+    //         'content' => 'required',
+    //         'tags' => 'required',
+    //         'category_id' => 'required'
+    //     ]);
+    //     if ($request->hasFile('featured')) {
+    //         $featured = $request->featured;
+    //         $featured_new_name = time() . $featured->getClientOriginalName();
+    //         $featured->move('uploads/posts', $featured_new_name);
+    //         $post->featured = 'uploads/posts/'. $featured_new_name;
+    //     }
+
+    //     $post->title = $request->title;
+    //     $post->content = $request->content;
+    //     $post->category_id = $request->category_id;
+    //     $post->slug = str_slug($request->title);
+    //     // 'slug' => str_slug($request->title)
+    //     $post->tags()->sync($request->tags);
+    //     $post->save();
+
+    //     // dd($post);
+
+    //     // dd(Request);
+
+    //     flashy()->success('Succesfully to Update.');
+
+    //     return redirect('admin/post');
+
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -125,10 +189,12 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
         Post::destroy($id);
 
         return redirect('admin/post');
+        flashy()->info('The post was just trashed.');
     }
+    
 }

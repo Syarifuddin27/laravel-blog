@@ -22,11 +22,11 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // return view('home');
+        flashy()->info('WELCOME');
         return view('admin.dashboard')
                 ->with('post_count', Post::all()->count())
                 ->with('category_count', Category::all()->count())

@@ -34,18 +34,6 @@
                     @endforeach
                 </div>
                 <div class="form-group">
-                    <label for="title">Harga Jual</label>
-                    <input type="number" name="harga_jual" class="form-control" style="text-transform: capitalize;">
-                </div>
-                <div class="form-group">
-                    <label for="title">Harga Grosir</label>
-                    <input type="number" name="harga_grosir" class="form-control" style="text-transform: capitalize;">
-                </div>
-                <div class="form-group">
-                    <label for="title">Jumlah Barang</label>
-                    <input type="number" name="jumlahBarang" class="form-control" style="text-transform: capitalize;">
-                </div>
-                <div class="form-group">
                     <label for="content">Content</label>
                     <textarea name="content" id="summary-ckeditor" cols="5" rows="5" class="form-control"></textarea>
                 </div>

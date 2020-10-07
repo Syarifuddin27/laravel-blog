@@ -9,7 +9,7 @@ class Profile extends Model
     protected $table = 'profiles';
 
     protected $fillable = [
-        'avatar', 'user_id', 'about', 'ig', 'youtube'
+        'avatar', 'user_id', 'about', 'facebook', 'youtube'
     ];
     public function user()
     {

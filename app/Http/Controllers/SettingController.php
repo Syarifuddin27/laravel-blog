@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +18,8 @@ class SettingController extends Controller
      */
     public function index()
     {
+        // return view('admin.settings.settings')->with('settings', Setting::first());
+       // dd(request());
         $settings = Setting::first();
         return view('admin.settings.settings', compact('settings', $settings));
     }
@@ -76,6 +82,10 @@ class SettingController extends Controller
             'contact_email' => 'required|email',
             'address' => 'required'
         ]);
+        // $setting->site_name = $request->site_name;
+        // $setting->address = $request->address;
+        // $setting->contact_number = $request->contact_number;
+        // $setting->contact_email = $request->contact_email;
         $setting = Setting::first();
         $setting->site_name = request()->site_name;
         $setting->address = request()->address;
@@ -83,6 +93,7 @@ class SettingController extends Controller
         $setting->contact_email = request()->contact_email;
         $setting->quotes = request()->quotes;
         $setting->save();
+        flashy()->info('Settings has been Update.');
 
         return redirect()->back();
     }

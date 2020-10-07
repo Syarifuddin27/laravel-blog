@@ -45,6 +45,8 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
+        flashy()->success('Succesfully to Create new Category.');
+
         return redirect('admin/category');
     }
 
@@ -83,6 +85,8 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
         $category->update($request->all());
+
+        flashy()->success('Category Has Been Update.');
         
         return redirect('admin/category');
     }
@@ -93,15 +97,16 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        //Category::destroy($id);
         $category = Category::find($id);
         foreach ($category->posts as $post) {
             $post->delete();
         }
         $category->delete();
 
-        // flashy()->success('You succesfully deleted the category.');
+        flashy()->success('You succesfully deleted the category.');
         return redirect('admin/category');
     }
 }
